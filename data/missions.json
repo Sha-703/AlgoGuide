@@ -1,0 +1,158 @@
+[
+  {
+    "id": "m1",
+    "titre": "Marché de Kinshasa",
+    "contexte": "Kinshasa, RDC",
+    "description": "Compte les articles vendus au grand marché de la ville.",
+    "narrative": "Tu es vendeur au Grand Marché de Kinshasa. Chaque matin, tu dois compter tes articles pour savoir combien tu en as vendu. Utilise une boucle POUR pour additionner tes ventes !",
+    "notion": "POUR",
+    "difficulte": 1,
+    "pointsMax": 100,
+    "badge": {
+      "id": "commercant",
+      "nom": "Commerçant Numérique",
+      "emoji": "🛒",
+      "description": "Maîtrise de la boucle POUR au marché de Kinshasa"
+    },
+    "exercice": {
+      "type": "trous",
+      "enonce": "Complète l'algorithme pour compter 5 articles vendus :",
+      "code": "total <- 0\nPOUR i DE 1 À ___ FAIRE\n  total <- total + 1\nFIN_POUR\nAFFICHER total",
+      "trous": [
+        { "id": "t1", "options": ["3", "5", "10", "1"], "reponse": "5" }
+      ]
+    }
+  },
+  {
+    "id": "m2",
+    "titre": "Champ de Maïs",
+    "contexte": "Village de Kasaï, RDC",
+    "description": "Récolte le maïs jusqu'à ce que ton panier soit plein.",
+    "narrative": "Dans ton champ à Kasaï, tu récoltes des épis de maïs un par un. Tu dois t'arrêter quand ton panier de 10 épis est plein. Utilise une boucle TANT QUE !",
+    "notion": "TANT_QUE",
+    "difficulte": 1,
+    "pointsMax": 100,
+    "badge": {
+      "id": "agronome",
+      "nom": "Ingénieur des Champs",
+      "emoji": "🌽",
+      "description": "Boucle TANT QUE maîtrisée — champ de maïs récolté !"
+    },
+    "exercice": {
+      "type": "qcm",
+      "enonce": "Quelle condition TANT QUE est correcte pour remplir un panier de 10 épis ?",
+      "code": "panier <- 0\nTANT QUE ??? FAIRE\n  panier <- panier + 1\nFIN_TANT_QUE",
+      "choix": [
+        "TANT QUE panier = 10 FAIRE",
+        "TANT QUE panier < 10 FAIRE",
+        "TANT QUE panier > 10 FAIRE",
+        "TANT QUE panier == 0 FAIRE"
+      ],
+      "bonneReponse": 1
+    }
+  },
+  {
+    "id": "m3",
+    "titre": "Paiement Mobile",
+    "contexte": "Lubumbashi, RDC",
+    "description": "Vérifie si le solde est suffisant avant de valider un paiement.",
+    "narrative": "Tu travailles pour un service de paiement mobile à Lubumbashi. Avant chaque transaction, tu dois vérifier que le client a assez d'argent. Utilise une structure SI/SINON !",
+    "notion": "SI_SINON",
+    "difficulte": 2,
+    "pointsMax": 100,
+    "badge": {
+      "id": "banquier",
+      "nom": "Banquier Mobile",
+      "emoji": "📱",
+      "description": "Conditions SI/SINON maîtrisées — paiement sécurisé !"
+    },
+    "exercice": {
+      "type": "trous",
+      "enonce": "Complète l'algorithme de vérification de paiement :",
+      "code": "solde <- 5000\nmontant <- 3000\nSI ___ >= montant ALORS\n  AFFICHER \"Paiement validé\"\nSINON\n  AFFICHER \"Solde insuffisant\"\nFIN_SI",
+      "trous": [
+        { "id": "t1", "options": ["montant", "solde", "5000", "3000"], "reponse": "solde" }
+      ]
+    }
+  },
+  {
+    "id": "m4",
+    "titre": "École de Lubumbashi",
+    "contexte": "Lubumbashi, RDC",
+    "description": "Calcule la moyenne des notes de 4 élèves.",
+    "narrative": "Tu es enseignant dans une école à Lubumbashi. Tu dois calculer la moyenne de la classe pour le bulletin de fin de trimestre. Combine une boucle POUR et une addition !",
+    "notion": "POUR",
+    "difficulte": 2,
+    "pointsMax": 100,
+    "badge": {
+      "id": "educateur",
+      "nom": "Éducateur de Lubumbashi",
+      "emoji": "🎓",
+      "description": "Calcul de moyenne réussi à l'école de Lubumbashi"
+    },
+    "exercice": {
+      "type": "qcm",
+      "enonce": "Pour calculer la moyenne de 4 notes stockées dans somme, quelle ligne est correcte ?",
+      "code": "somme <- 0\nPOUR i DE 1 À 4 FAIRE\n  somme <- somme + notes[i]\nFIN_POUR\nmoyenne <- ???",
+      "choix": [
+        "moyenne <- somme + 4",
+        "moyenne <- somme * 4",
+        "moyenne <- somme / 4",
+        "moyenne <- 4 / somme"
+      ],
+      "bonneReponse": 2
+    }
+  },
+  {
+    "id": "m5",
+    "titre": "Route de Goma",
+    "contexte": "Goma, RDC",
+    "description": "Optimise un trajet en évitant les routes bloquées.",
+    "narrative": "Tu es chauffeur de camion sur la route de Goma. Certaines routes sont bloquées. Ton GPS algorithmique doit choisir le bon chemin selon les conditions de la route !",
+    "notion": "SI_SINON",
+    "difficulte": 3,
+    "pointsMax": 100,
+    "badge": {
+      "id": "ingenieur",
+      "nom": "Ingénieur des Routes",
+      "emoji": "🛣️",
+      "description": "Optimisation de trajet réussie sur la route de Goma"
+    },
+    "exercice": {
+      "type": "trous",
+      "enonce": "Complète l'algorithme de routage :",
+      "code": "routeBloquee <- VRAI\nSI ___ = VRAI ALORS\n  AFFICHER \"Prendre route secondaire\"\nSINON\n  AFFICHER \"Continuer sur la route principale\"\nFIN_SI",
+      "trous": [
+        { "id": "t1", "options": ["route", "routeBloquee", "VRAI", "FAUX"], "reponse": "routeBloquee" }
+      ]
+    }
+  },
+  {
+    "id": "m6",
+    "titre": "Festival de Brazzaville",
+    "contexte": "Brazzaville, Congo",
+    "description": "Gère la billetterie du grand festival de musique.",
+    "narrative": "Le Festival de Brazzaville est l'événement de l'année ! Tu dois gérer la vente des billets. La salle a 200 places. Arrête la vente quand c'est complet — combine TANT QUE et SI !",
+    "notion": "MIXTE",
+    "difficulte": 3,
+    "pointsMax": 100,
+    "badge": {
+      "id": "organisateur",
+      "nom": "Organisateur du Festival",
+      "emoji": "🎪",
+      "description": "Gestion de billetterie réussie au Festival de Brazzaville"
+    },
+    "exercice": {
+      "type": "qcm",
+      "enonce": "Quelle structure est la mieux adaptée pour vendre des billets jusqu'à épuisement des 200 places ?",
+      "code": "places <- 200\nvendu <- 0\n// Vendre jusqu'à épuisement...",
+      "choix": [
+        "Une boucle POUR de 1 à 200",
+        "Une boucle TANT QUE vendu < places",
+        "Une structure SI vendu = 200",
+        "Pas besoin de boucle"
+      ],
+      "bonneReponse": 1
+    }
+  }
+]

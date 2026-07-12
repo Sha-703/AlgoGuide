@@ -1,0 +1,44 @@
+[
+  {
+    "id": "si_sinon_base",
+    "titre": "SI/SINON — Niveau 1",
+    "notion": "SI_SINON",
+    "difficulte": "debutant",
+    "description": "Écrire une condition simple pour vérifier si un nombre est positif."
+  },
+  {
+    "id": "si_sinon_imbriques",
+    "titre": "SI/SINON imbriqués — Niveau 2",
+    "notion": "SI_SINON",
+    "difficulte": "intermediaire",
+    "description": "Gérer plusieurs conditions imbriquées pour classer une note."
+  },
+  {
+    "id": "tant_que_intro",
+    "titre": "TANT QUE — Introduction",
+    "notion": "TANT_QUE",
+    "difficulte": "debutant",
+    "description": "Comprendre le mécanisme de la boucle TANT QUE avec un compteur simple."
+  },
+  {
+    "id": "boucle_tant_que_avance",
+    "titre": "TANT QUE — Niveau avancé",
+    "notion": "TANT_QUE",
+    "difficulte": "avance",
+    "description": "Utiliser TANT QUE avec des conditions complexes et plusieurs variables."
+  },
+  {
+    "id": "boucle_pour_intro",
+    "titre": "POUR — Introduction",
+    "notion": "POUR",
+    "difficulte": "debutant",
+    "description": "Utiliser une boucle POUR pour répéter une action un nombre fixe de fois."
+  },
+  {
+    "id": "boucle_pour_avance",
+    "titre": "POUR — Tableaux et sommes",
+    "notion": "POUR",
+    "difficulte": "avance",
+    "description": "Parcourir un tableau et calculer des sommes avec une boucle POUR."
+  }
+]

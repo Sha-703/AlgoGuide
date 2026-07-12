@@ -1,0 +1,129 @@
+[
+  {
+    "id": "si_sinon",
+    "titre": "Structure SI / SINON",
+    "description": "Apprends à prendre des décisions dans ton algorithme selon une condition.",
+    "notion": "SI_SINON",
+    "difficulte": "debutant",
+    "algorithme": [
+      { "id": 1, "texte": "// Vérifier si un élève a réussi son examen", "type": "commentaire", "indent": 0 },
+      { "id": 2, "texte": "note <- 14", "type": "instruction", "indent": 0 },
+      { "id": 3, "texte": "seuil <- 10", "type": "instruction", "indent": 0 },
+      { "id": 4, "texte": "SI note >= seuil ALORS", "type": "condition", "indent": 0, "trou": true, "reponse": "SI note >= seuil ALORS" },
+      { "id": 5, "texte": "AFFICHER \"Félicitations, tu as réussi !\"", "type": "instruction", "indent": 1 },
+      { "id": 6, "texte": "SINON", "type": "condition", "indent": 0 },
+      { "id": 7, "texte": "AFFICHER \"Tu dois retravailler le cours.\"", "type": "instruction", "indent": 1 },
+      { "id": 8, "texte": "FIN_SI", "type": "fin", "indent": 0 }
+    ],
+    "variables": { "note": 14, "seuil": 10 },
+    "quiz": [
+      {
+        "id": "q1",
+        "enonce": "Quelle est la condition testée dans cet algorithme ?",
+        "choix": ["note > 20", "note >= seuil", "note == 10", "seuil > note"],
+        "bonneReponse": 1,
+        "explication": "On vérifie si la note est supérieure ou égale au seuil de réussite."
+      },
+      {
+        "id": "q2",
+        "enonce": "Que se passe-t-il si note = 8 ?",
+        "choix": ["Rien", "Message de félicitations", "Message d'encouragement", "Erreur"],
+        "bonneReponse": 2,
+        "explication": "8 < 10, donc la condition est fausse et on exécute le bloc SINON."
+      },
+      {
+        "id": "q3",
+        "enonce": "Comment termine-t-on une structure SI/SINON ?",
+        "choix": ["FIN_BOUCLE", "FIN_SI", "FIN_CONDITION", "RETOUR"],
+        "bonneReponse": 1,
+        "explication": "On utilise FIN_SI pour fermer une structure conditionnelle."
+      }
+    ]
+  },
+  {
+    "id": "tant_que",
+    "titre": "Boucle TANT QUE",
+    "description": "Répète des instructions tant qu'une condition reste vraie.",
+    "notion": "TANT_QUE",
+    "difficulte": "intermediaire",
+    "algorithme": [
+      { "id": 1, "texte": "// Compter les sacs de riz jusqu'à remplir le stock", "type": "commentaire", "indent": 0 },
+      { "id": 2, "texte": "stock <- 0", "type": "instruction", "indent": 0 },
+      { "id": 3, "texte": "max <- 5", "type": "instruction", "indent": 0 },
+      { "id": 4, "texte": "TANT QUE stock < max FAIRE", "type": "boucle", "indent": 0, "trou": true, "reponse": "TANT QUE stock < max FAIRE" },
+      { "id": 5, "texte": "stock <- stock + 1", "type": "instruction", "indent": 1 },
+      { "id": 6, "texte": "AFFICHER stock", "type": "instruction", "indent": 1 },
+      { "id": 7, "texte": "FIN_TANT_QUE", "type": "fin", "indent": 0 },
+      { "id": 8, "texte": "AFFICHER \"Stock plein !\"", "type": "instruction", "indent": 0 }
+    ],
+    "variables": { "stock": 0, "max": 5 },
+    "quiz": [
+      {
+        "id": "q1",
+        "enonce": "Combien de fois la boucle s'exécute-t-elle ?",
+        "choix": ["4 fois", "5 fois", "6 fois", "Indéfiniment"],
+        "bonneReponse": 1,
+        "explication": "La boucle s'exécute pour stock = 0, 1, 2, 3, 4, soit 5 fois."
+      },
+      {
+        "id": "q2",
+        "enonce": "Quelle valeur a stock après la boucle ?",
+        "choix": ["4", "5", "6", "0"],
+        "bonneReponse": 1,
+        "explication": "Quand stock = 5, la condition stock < 5 devient fausse et on sort de la boucle."
+      },
+      {
+        "id": "q3",
+        "enonce": "Que risque-t-il d'arriver si on oublie stock <- stock + 1 ?",
+        "choix": ["Rien", "Boucle infinie", "Erreur de syntaxe", "stock = -1"],
+        "bonneReponse": 1,
+        "explication": "Sans incrémenter stock, la condition reste toujours vraie → boucle infinie !"
+      }
+    ]
+  },
+  {
+    "id": "boucle_pour",
+    "titre": "Boucle POUR",
+    "description": "Répète des instructions un nombre fixe de fois avec un compteur.",
+    "notion": "POUR",
+    "difficulte": "intermediaire",
+    "algorithme": [
+      { "id": 1, "texte": "// Calculer la somme de 1 à 5", "type": "commentaire", "indent": 0 },
+      { "id": 2, "texte": "somme <- 0", "type": "instruction", "indent": 0 },
+      { "id": 3, "texte": "POUR i DE 1 À 5 FAIRE", "type": "boucle", "indent": 0, "trou": true, "reponse": "POUR i DE 1 À 5 FAIRE" },
+      { "id": 4, "texte": "somme <- somme + i", "type": "instruction", "indent": 1 },
+      { "id": 5, "texte": "AFFICHER i", "type": "instruction", "indent": 1 },
+      { "id": 6, "texte": "FIN_POUR", "type": "fin", "indent": 0 },
+      { "id": 7, "texte": "AFFICHER somme", "type": "instruction", "indent": 0 }
+    ],
+    "variables": { "somme": 0 },
+    "quiz": [
+      {
+        "id": "q1",
+        "enonce": "Quelle est la valeur finale de somme ?",
+        "choix": ["10", "15", "20", "5"],
+        "bonneReponse": 1,
+        "explication": "1+2+3+4+5 = 15"
+      },
+      {
+        "id": "q2",
+        "enonce": "Quelle est la différence entre POUR et TANT QUE ?",
+        "choix": [
+          "Aucune différence",
+          "POUR répète un nombre fixe de fois, TANT QUE dépend d'une condition",
+          "POUR est plus rapide",
+          "TANT QUE ne peut pas compter"
+        ],
+        "bonneReponse": 1,
+        "explication": "POUR est utilisé quand on connaît à l'avance le nombre d'itérations."
+      },
+      {
+        "id": "q3",
+        "enonce": "Combien de fois i vaut-il 3 pendant l'exécution ?",
+        "choix": ["0", "1", "2", "3"],
+        "bonneReponse": 1,
+        "explication": "i prend chaque valeur une seule fois : 1, 2, 3, 4, 5."
+      }
+    ]
+  }
+]
