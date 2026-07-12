@@ -1,0 +1,45 @@
+{
+  "users": [
+    {
+      "id": "7p7136wjmrhvcuwa",
+      "role": "enseignant",
+      "nom": "kiese",
+      "prenom": "chris",
+      "ecole": "muenze",
+      "classes": [
+        "6eme A"
+      ],
+      "code": "MUE-IV5D",
+      "createdAt": "2026-07-12T14:08:46.186Z"
+    },
+    {
+      "id": "1mjcdm53mrhvewcy",
+      "role": "eleve",
+      "nom": "adassa",
+      "prenom": "esther",
+      "ecole": "muenze",
+      "classe": "6eme A",
+      "enseignantId": "7p7136wjmrhvcuwa",
+      "createdAt": "2026-07-12T14:10:21.394Z"
+    }
+  ],
+  "mdps": {
+    "7p7136wjmrhvcuwa": "Kubuanu"
+  },
+  "progressions": [
+    {
+      "eleveId": "1mjcdm53mrhvewcy",
+      "score": 0,
+      "missionsCompletees": [],
+      "badgesDebloques": [],
+      "quizScores": {},
+      "moduleEnCours": "AlgoStep",
+      "algoStepPct": 0,
+      "algoQuestPct": 0,
+      "exercicesRates": [],
+      "tentatives": 0,
+      "exercicesAssignes": [],
+      "derniereActivite": "2026-07-12"
+    }
+  ]
+}
