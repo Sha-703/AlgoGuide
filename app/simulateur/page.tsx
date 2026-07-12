@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Navbar } from "@/components/Navbar";
 import { AlgoEditor } from "@/components/simulateur/AlgoEditor";
 import { StepVisualizer } from "@/components/simulateur/StepVisualizer";
 import { VariablePanel } from "@/components/simulateur/VariablePanel";
+import { AssignedExercises } from "@/components/simulateur/AssignedExercises";
 import { QuizModal } from "@/components/simulateur/QuizModal";
 import { Button } from "@/components/ui/Button";
 import { ProgressBar } from "@/components/ui/ProgressBar";
@@ -18,6 +19,8 @@ const DELAI = 600;
 
 export default function SimulateurPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const exerciceId = searchParams.get("exercice");
   const [user, setUser]         = useState<UserEleve | null>(null);
   const [prog, setProg]         = useState<ProgressionEleve | null>(null);
   const [idx, setIdx]           = useState(0);
@@ -39,6 +42,17 @@ export default function SimulateurPage() {
     setUser(u as UserEleve);
     getProgression(u.id).then(p => setProg(p));
   }, [router]);
+
+  // Marquer l'exercice comme terminé si un exercice est spécifié dans l'URL
+  useEffect(() => {
+    if (exerciceId && user) {
+      fetch("/api/exercises/complete", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ eleveId: user.id, exerciceId }),
+      }).catch(console.error);
+    }
+  }, [exerciceId, user]);
 
   function reset() {
     if (ref.current) clearInterval(ref.current);
@@ -146,6 +160,7 @@ export default function SimulateurPage() {
           </div>
 
           <div className="space-y-4">
+            <AssignedExercises eleveId={user.id} />
             <VariablePanel variables={vars} historique={hist} />
             <div className="bg-surface border border-border rounded-xl p-4 shadow-card">
               <h3 className="text-xs font-semibold text-text-2 uppercase tracking-wide mb-3">Progression</h3>

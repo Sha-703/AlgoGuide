@@ -37,6 +37,7 @@ export interface ProgressionEleve {
   algoQuestPct: number;
   exercicesRates: string[];
   tentatives: number;
+  exercicesAssignes: { exerciceId: string; assigneLe: string; termine: boolean }[];
   derniereActivite: string;
 }
 
