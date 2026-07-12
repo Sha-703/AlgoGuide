@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Navbar } from "@/components/Navbar";
 import { AlgoEditor } from "@/components/simulateur/AlgoEditor";
@@ -92,8 +92,11 @@ export default function SimulateurPage() {
     });
   }
 
-  const etapes = module ? executerAlgorithme(module.algorithme, module.variables) : [];
   if (!user || !module) return null;
+
+  const etapes = useMemo(() => {
+    return executerAlgorithme(module.algorithme, module.variables);
+  }, [module]);
 
   return (
     <>
