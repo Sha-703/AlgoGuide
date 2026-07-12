@@ -1,3 +1,4 @@
+"use client";
 interface ProgressBarProps { value: number; label?: string; showValue?: boolean; color?: "green"|"blue"|"yellow"|"red"; size?: "sm"|"md"; }
 const C: Record<string, string> = { green: "bg-accent", blue: "bg-primary", yellow: "bg-warn", red: "bg-danger" };
 export function ProgressBar({ value, label, showValue = true, color = "green", size = "md" }: ProgressBarProps) {
