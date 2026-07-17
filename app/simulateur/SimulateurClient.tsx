@@ -91,11 +91,14 @@ export default function SimulateurClient() {
     });
   }
 
-  if (!user || !module) return null;
-
+  // ⚠️ Tous les hooks doivent être appelés AVANT un éventuel `return` anticipé,
+  // sinon React lève l'erreur #310 ("Rendered more hooks than during the previous render").
   const etapes = useMemo(() => {
+    if (!module) return [];
     return executerAlgorithme(module.algorithme, module.variables);
   }, [module]);
+
+  if (!user || !module) return null;
 
   return (
     <>

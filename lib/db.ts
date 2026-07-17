@@ -1,23 +1,97 @@
 import fs from "fs/promises";
 import path from "path";
+// Seed statique (committé) pour amencer Redis au premier déploiement. Importé
+// statiquement -> garanti d'être bundlé dans la fonction serverless (un
+// fs.readFile runtime ne l'est pas, et nft ne le détecte pas toujours).
+import dbSeed from "@/data/db.json";
+
+// ─── Stockage : Upstash Redis en prod (Vercel), fichier en local ──────────────
+// Le système de fichiers des fonctions serverless Vercel est en lecture seule :
+// on stocke donc la "base" (un seul document JSON { users, mdps, progressions })
+// dans Upstash Redis (intégration Vercel Marketplace). En local, sans les vars,
+// on retombe sur le fichier data/db.json — comportement inchangé pour le dev.
+//
+// Au tout premier déploiement, le store Redis est vide : on l'amorce (seed) depuis
+// data/db.json (le fichier committé), ce qui conserve les utilisateurs existants.
+//
+// Variables d'env acceptées (l'intégration Upstash injecte les premières ;
+// KV_REST_API_* correspond à l'ancien client @vercel/kv, gardé pour compat) :
+//   UPSTASH_REDIS_REST_URL  | KV_REST_API_URL
+//   UPSTASH_REDIS_REST_TOKEN| KV_REST_API_TOKEN
 
 const DB_PATH = path.join(process.cwd(), "data", "db.json");
+const KV_KEY = "algoguide:db";
+const EMPTY = { users: [], mdps: {}, progressions: [] };
 
-// Fonction pour lire la DB
-export async function readDb() {
+function redisUrl() {
+  return process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL || "";
+}
+function redisToken() {
+  return process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN || "";
+}
+function hasKv(): boolean {
+  return Boolean(redisUrl() && redisToken());
+}
+
+let _redis: any = null;
+async function getKv() {
+  if (_redis) return _redis;
+  const { Redis } = await import("@upstash/redis");
+  _redis = new Redis({ url: redisUrl(), token: redisToken() });
+  return _redis as {
+    get: (key: string) => Promise<any>;
+    set: (key: string, value: any) => Promise<string | null>;
+  };
+}
+
+// Lecture du fichier (seed + dev local).
+async function readDbFile(): Promise<any> {
   try {
     const data = await fs.readFile(DB_PATH, "utf-8");
     return JSON.parse(data);
-  } catch (error) {
-    // Si la DB n'existe pas ou est corrompue, on la réinitialise
-    const empty = { users: [], mdps: {}, progressions: [] };
-    await fs.writeFile(DB_PATH, JSON.stringify(empty, null, 2));
-    return empty;
+  } catch {
+    // Fichier absent ou corrompu : on réinitialise localement.
+    await fs.writeFile(DB_PATH, JSON.stringify(EMPTY, null, 2));
+    return EMPTY;
   }
 }
 
-// Fonction pour écrire dans la DB
+// Lecture de la DB (Upstash Redis en prod Vercel, fichier en local).
+export async function readDb() {
+  if (hasKv()) {
+    try {
+      const kv = await getKv();
+      const raw = await kv.get(KV_KEY);
+      if (raw != null) {
+        // Objet stocké tel quel -> on le renvoie directement.
+        // Chaîne JSON (anciennement stringifiée) -> on parse par sécurité.
+        return typeof raw === "string" ? JSON.parse(raw) : raw;
+      }
+      // Premier déploiement : on amorce le store Redis depuis data/db.json (committé).
+      // Import statique -> le fichier est bundlé dans la fonction serverless ; un
+      // fs.readFile runtime n'est pas garanti d'être inclus sur Vercel.
+      await kv.set(KV_KEY, dbSeed);
+      return dbSeed;
+    } catch (error) {
+      console.error("Redis readDb a échoué, repli sur le fichier:", error);
+      return readDbFile();
+    }
+  }
+  return readDbFile();
+}
+
+// Écriture de la DB (Upstash Redis en prod Vercel, fichier en local).
 export async function writeDb(data: any) {
+  if (hasKv()) {
+    try {
+      const kv = await getKv();
+      await kv.set(KV_KEY, data);
+      return;
+    } catch (error) {
+      console.error("Redis writeDb a échoué, repli sur le fichier:", error);
+      // On tente le fichier (ne persiste pas en prod, mais évite un 500 dur).
+    }
+  }
   await fs.writeFile(DB_PATH, JSON.stringify(data, null, 2));
 }
 

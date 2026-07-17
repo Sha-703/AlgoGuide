@@ -25,27 +25,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: "Erreur serveur. Réessaie plus tard." });
   }
 }
-
-// GET /api/auth/progression?eleveId=xxx - Récupérer la progression d'un élève
-export async function GET(req: NextRequest) {
-  try {
-    const { searchParams } = new URL(req.url);
-    const eleveId = searchParams.get("eleveId");
-
-    if (!eleveId) {
-      return NextResponse.json({ ok: false, error: "eleveId requis" });
-    }
-
-    const db = await readDb();
-    const prog = (db.progressions || []).find((p: any) => p.eleveId === eleveId);
-
-    if (!prog) {
-      return NextResponse.json({ ok: true, data: null });
-    }
-
-    return NextResponse.json({ ok: true, data: prog });
-  } catch (error) {
-    console.error("Erreur get-progression:", error);
-    return NextResponse.json({ ok: false, error: "Erreur serveur." });
-  }
-}

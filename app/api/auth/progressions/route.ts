@@ -1,5 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { readDb } from "@/lib/db";
+
+// Lecture live depuis Redis (sinon Next prerender statique ignorant les écritures).
+export const dynamic = 'force-dynamic';
 
 // GET /api/auth/progressions - Récupérer toutes les progressions
 export async function GET() {
